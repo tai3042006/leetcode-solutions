@@ -29,14 +29,16 @@ This repository contains Java solutions for selected LeetCode and NeetCode probl
 
 ## Repository Structure
 
+```text
 src/
 ├── easy/
-│ ├── DuplicateInteger.java
-│ ├── TwoSum.java
-│ ├── ValidAnagram.java
-│ └── …
+│   ├── DuplicateInteger.java
+│   ├── TwoSum.java
+│   └── ValidAnagram.java
 └── medium/
-└── GroupAnagrams.java
+    └── GroupAnagrams.java
+```
+
 
 > Solutions are implemented in Java, organized by source (NeetCode vs. LeetCode) and difficulty.  
 > Run any class’s `main()` for quick testing.
