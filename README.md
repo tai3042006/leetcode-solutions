@@ -22,6 +22,7 @@ This repository contains Java solutions for selected LeetCode and NeetCode probl
 | 7   | [Longest Common Prefix](https://github.com/tai3042006/leetcode-solutions/blob/main/src/Easy/LongestCommonPrefix.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/Easy/LongestCommonPrefix.java) | Trim down common prefix until it matches all strings |
 | 8   | [Jewels and Stones](https://github.com/tai3042006/leetcode-solutions/blob/main/src/Easy/JewelsAndStones.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/Easy/JewelsAndStones.java) | Store jewels in a HashSet for fast lookups. Count how many stones are in the HashSet |
 | 9   | [First Unique Character](https://github.com/tai3042006/leetcode-solutions/blob/main/src/Easy/firstUniqChar.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/Easy/firstUniqChar.java) | Use a HashMap to count character frequencies, then return the index of the first character with a count of 1. If none, return -1. |
+| 10  | [Group Anagrams](https://github.com/tai3042006/leetcode-solutions/blob/main/src/Easy/GroupAnagrams.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/Easy/GroupAnagrams.java) | Sort words and group them via a map. |
 
 ### LeetCode Medium Problems
 
@@ -38,6 +39,7 @@ src/
 │   ├── TwoSum.java
 │   ├── ValidAnagram.java
 │   ├── JewelsAndStones.java
-│   └── firstUniqChar.java
+│   ├── firstUniqChar.java
+│   └── GroupAnagrams.java
 └── Medium/
     └── GroupAnagrams.java
