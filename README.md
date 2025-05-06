@@ -1,35 +1,35 @@
-# LeetCode Java Solutions
+## LeetCode Java Solutions
 
 This repository contains Java solutions for selected LeetCode and NeetCode problems, organized by difficulty.
 
-## NeetCode Problems
+### NeetCode Problems
 
 | No  | Title                                           | Solution                                      | Basic Idea                 |
 | --- | ----------------------------------------------- | --------------------------------------------- | -------------------------- |
-| 1   | [Duplicate Integer](https://neetcode.io/problems/duplicate-integer)  | [Java](src/easy/DuplicateInteger.java)        | Nested loops compare every pair  |
-| 2   | [Two Sum](https://neetcode.io/problems/two-integer-sum)              | [Java](src/easy/TwoSum.java)                  | 	HashMap one‑pass: find complement         |
+| 1   | [Duplicate Integer](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/DuplicateInteger.java)  | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/DuplicateInteger.java)        | Nested loops compare every pair  |
+| 2   | [Two Sum](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/TwoSum.java)              | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/TwoSum.java)                  | HashMap one‑pass: find complement         |
 
-## LeetCode Easy Problems
+### LeetCode Easy Problems
 
 | No  | Title                                                                 | Solution                              | Basic Idea                     |
 | --- | --------------------------------------------------------------------- | ------------------------------------- | ------------------------------ |
-| 1   | [Valid Anagram](https://leetcode.com/problems/valid-anagram/)         | [Java](src/easy/ValidAnagram.java)    | Count characters in both strings. If the counts match, they're anagrams.  |
-| 2   | [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | [Java](src/easy/MaxProfit.java)       | Track min price so far, update max profit   |
-| 3   | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [Java](src/easy/MergeSortedArray.java)| Two pointers from end, fill backwards          |
-| 4   | [Move Zeroes](https://leetcode.com/problems/move-zeroes/)             | [Java](src/easy/MoveZeroes.java)      | Shift non‑zeros forward, then fill zeros at end             |
-| 5   | [Palindrome Number](https://leetcode.com/problems/palindrome-number/) | [Java](src/easy/PalindromeNumber.java)| Reverse half the digits and compare        |
-| 6   | [Roman to Integer](https://leetcode.com/problems/roman-to-integer/)   | [Java](src/easy/RomanToInteger.java)  | Map symbols, add or subtract based on next value           |
-| 7   | [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) | [Java](src/easy/LongestCommonPrefix.java) | Trim down common prefix until it matches all strings |
-| 8   | [JewelsandStones](https://leetcode.com/problems/jewels-and-stones/) | [Java](src/easy/JewelsandStones.java) | Store jewels in a HashSet for fast lookups. Count how many stones are in the HashSet |
-| 8   | [firstUniqChar](https://leetcode.com/problems/first-unique-character-in-a-string/description/) | [Java](src/easy/firstUniqChar.java) | Use a HashMap to count character frequencies, then return the index of the first character with a count of 1. If none, return -1. |
+| 1   | [Valid Anagram](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/ValidAnagram.java)         | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/ValidAnagram.java)    | Count characters in both strings. If the counts match, they're anagrams.  |
+| 2   | [Best Time to Buy and Sell Stock](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/MaxProfit.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/MaxProfit.java)       | Track min price so far, update max profit   |
+| 3   | [Merge Sorted Array](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/MergeSortedArray.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/MergeSortedArray.java)| Two pointers from end, fill backwards          |
+| 4   | [Move Zeroes](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/MoveZeroes.java)             | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/MoveZeroes.java)      | Shift non‑zeros forward, then fill zeros at end             |
+| 5   | [Palindrome Number](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/PalindromeNumber.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/PalindromeNumber.java)| Reverse half the digits and compare        |
+| 6   | [Roman to Integer](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/RomanToInteger.java)   | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/RomanToInteger.java)  | Map symbols, add or subtract based on next value           |
+| 7   | [Longest Common Prefix](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/LongestCommonPrefix.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/LongestCommonPrefix.java) | Trim down common prefix until it matches all strings |
+| 8   | [Jewels and Stones](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/JewelsAndStones.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/JewelsAndStones.java) | Store jewels in a HashSet for fast lookups. Count how many stones are in the HashSet |
+| 9   | [First Unique Character](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/firstUniqChar.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/easy/firstUniqChar.java) | Use a HashMap to count character frequencies, then return the index of the first character with a count of 1. If none, return -1. |
 
-## LeetCode Medium Problems
+### LeetCode Medium Problems
 
 | No  | Title                                                    | Solution                                | Basic Idea                          |
 | --- | -------------------------------------------------------- | --------------------------------------- | ------------------------------------- |
-| 49  | [Group Anagrams](https://leetcode.com/problems/group-anagrams/) | [Java](src/medium/GroupAnagrams.java)   | Sort words & group via map          |
+| 49  | [Group Anagrams](https://github.com/tai3042006/leetcode-solutions/blob/main/src/medium/GroupAnagrams.java) | [Java](https://github.com/tai3042006/leetcode-solutions/blob/main/src/medium/GroupAnagrams.java)   | Sort words & group via map          |
 
-## Repository Structure
+### Repository Structure
 
 ```text
 src/
@@ -41,8 +41,3 @@ src/
 │   └── firstUniqChar.java
 └── medium/
     └── GroupAnagrams.java
-
-```
-
-> Solutions are implemented in Java, organized by source (NeetCode vs. LeetCode) and difficulty.  
-> Run any class’s `main()` for quick testing.
