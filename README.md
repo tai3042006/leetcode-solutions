@@ -20,6 +20,8 @@ This repository contains Java solutions for selected LeetCode and NeetCode probl
 | 5   | [Palindrome Number](https://leetcode.com/problems/palindrome-number/) | [Java](src/easy/PalindromeNumber.java)| Reverse half the digits and compare        |
 | 6   | [Roman to Integer](https://leetcode.com/problems/roman-to-integer/)   | [Java](src/easy/RomanToInteger.java)  | Map symbols, add or subtract based on next value           |
 | 7   | [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) | [Java](src/easy/LongestCommonPrefix.java) | Trim down common prefix until it matches all strings |
+| 8   | [JewelsandStones](https://leetcode.com/problems/jewels-and-stones/) | [Java](src/easy/JewelsandStones.java) | Store jewels in a HashSet for fast lookups. Count how many stones are in the HashSet |
+| 8   | [firstUniqChar](https://leetcode.com/problems/first-unique-character-in-a-string/description/) | [Java](src/easy/firstUniqChar.java) | Use a HashMap to count character frequencies, then return the index of the first character with a count of 1. If none, return -1. |
 
 ## LeetCode Medium Problems
 
@@ -34,11 +36,13 @@ src/
 ├── easy/
 │   ├── DuplicateInteger.java
 │   ├── TwoSum.java
-│   └── ValidAnagram.java
+│   ├── ValidAnagram.java
+│   ├── JewelsAndStones.java
+│   └── firstUniqChar.java
 └── medium/
     └── GroupAnagrams.java
-```
 
+```
 
 > Solutions are implemented in Java, organized by source (NeetCode vs. LeetCode) and difficulty.  
 > Run any class’s `main()` for quick testing.
