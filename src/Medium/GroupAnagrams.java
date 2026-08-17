@@ -1,4 +1,6 @@
 // https://leetcode.com/problems/group-anagrams/
+package Medium;
+
 import java.util.HashMap;
 import java.util.List;
 import jave.util.ArrayList;
@@ -20,3 +22,4 @@ public class GroupAnagrams {
 	    //return it to a list
 	    return new ArrayList<>(map.values());
 	}
+}
