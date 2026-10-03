@@ -30,12 +30,15 @@ jobs:
       - name: Update README
         run: python script/update_readme.py
 
-      - name: Commit README
+        - name: Commit README
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add README.md
-          git diff --cached --quiet || (
+
+          if ! git diff --cached --quiet; then
             git commit -m "docs: update LeetCode README"
-            git push
-          )
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
