@@ -43,3 +43,22 @@ src/
 │   └── GroupAnagrams.java
 └── Medium/
     └── GroupAnagrams.java
+
+## LeetCode Solutions
+
+<!-- LEETCODE_TABLE_START -->
+| # | Problem | Solution |
+|---:|---|---|
+| 1 | Two Sum | [JAVA](1-two-sum/two-sum.java) |
+| 4 | Median Of Two Sorted Arrays | [JAVA](4-median-of-two-sorted-arrays/median-of-two-sorted-arrays.java) |
+| 9 | Palindrome Number | [JAVA](9-palindrome-number/palindrome-number.java) |
+| 13 | Roman To Integer | [JAVA](13-roman-to-integer/roman-to-integer.java) |
+| 49 | Group Anagrams | [JAVA](49-group-anagrams/group-anagrams.java) |
+| 66 | Plus One | [JAVA](66-plus-one/plus-one.java) |
+| 88 | Merge Sorted Array | [JAVA](88-merge-sorted-array/merge-sorted-array.java) |
+| 217 | Contains Duplicate | [JAVA](217-contains-duplicate/contains-duplicate.java) |
+| 242 | Valid Anagram | [JAVA](242-valid-anagram/valid-anagram.java) |
+| 283 | Move Zeroes | [JAVA](283-move-zeroes/move-zeroes.java) |
+| 387 | First Unique Character In A String | [JAVA](387-first-unique-character-in-a-string/first-unique-character-in-a-string.java) |
+| 782 | Jewels And Stones | [JAVA](782-jewels-and-stones/jewels-and-stones.java) |
+<!-- LEETCODE_TABLE_END -->
