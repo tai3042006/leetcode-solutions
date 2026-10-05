@@ -6,6 +6,7 @@ from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
+META = ROOT / "meta.json"          # cache title/difficulty lay tu LeetCode
 IDEAS = ROOT / "ideas.json"          # cache: {"1-two-sum": "Hash map, O(n) and O(n)"} - sua tay thoai mai
 START, END = "<!-- PROBLEMS:START -->", "<!-- PROBLEMS:END -->"
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
@@ -29,21 +30,35 @@ def parse_problem(d: Path):
     num, slug = d.name.split("-", 1)
     title = slug.replace("-", " ").title()
     link = f"https://leetcode.com/problems/{slug}/"
-    diff = ""
+    diff, got_title = "", False
     rd = d / "README.md"
     if rd.exists():
         t = rd.read_text(encoding="utf-8", errors="ignore")
-        m = re.search(r'<a href="(https://leetcode\.com/problems/[^"]+)">\s*\d+\.\s*(.+?)\s*</a>', t)
+        m = (re.search(r'<a href="(https://leetcode\.com/problems/[^"]+)">\s*\d+\.\s*(.+?)\s*</a>', t)
+             or re.search(r'\[\s*\d+\.\s*(.+?)\s*\]\((https://leetcode\.com/problems/[^)]+)\)', t))
         if m:
-            link, title = m.group(1), m.group(2)
-        m = re.search(r"<h3>\s*(Easy|Medium|Hard)\s*</h3>", t)
+            a, b = m.group(1), m.group(2)
+            link, title = (a, b) if a.startswith("http") else (b, a)
+            got_title = True
+        m = re.search(r"\b(Easy|Medium|Hard)\b", t[:2000])
         if m:
             diff = m.group(1)
-    sols = []
-    for f in sorted(d.iterdir()):
-        if f.suffix.lower() in LANGS:
-            sols.append((LANGS[f.suffix.lower()], f))
-    return int(num), d.name, title, link, diff, sols
+    sols = [(LANGS[f.suffix.lower()], f) for f in sorted(d.iterdir()) if f.suffix.lower() in LANGS]
+    return int(num), d.name, title, link, diff, sols, got_title, slug
+
+
+def fetch_lc(slug: str) -> dict:
+    q = {"query": "query q($s:String!){question(titleSlug:$s){title difficulty}}", "variables": {"s": slug}}
+    req = urllib.request.Request("https://leetcode.com/graphql", data=json.dumps(q).encode(), headers={
+        "content-type": "application/json", "referer": "https://leetcode.com/problems/" + slug + "/",
+        "user-agent": "Mozilla/5.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            qq = json.load(r)["data"]["question"]
+        return {"title": qq["title"], "difficulty": qq["difficulty"]}
+    except Exception as e:
+        print(f"[warn] leetcode meta failed for {slug}: {e}", file=sys.stderr)
+        return {}
 
 
 def ask_idea(code: str, title: str) -> str:
@@ -63,18 +78,28 @@ def ask_idea(code: str, title: str) -> str:
         text = data["candidates"][0]["content"]["parts"][0]["text"]
         return text.strip().replace("\n", " ")
     except Exception as e:
-        print(f"[warn] AI failed for {title}: {e}", file=sys.stderr)
+        detail = e.read().decode()[:300] if hasattr(e, "read") else ""
+        print(f"[warn] AI failed for {title}: {e} {detail}", file=sys.stderr)
         return ""
 
 
 def main():
     ideas = json.loads(IDEAS.read_text(encoding="utf-8")) if IDEAS.exists() else {}
+    meta = json.loads(META.read_text(encoding="utf-8")) if META.exists() else {}
     probs = sorted(parse_problem(d) for d in ROOT.iterdir()
                    if d.is_dir() and re.match(r"^\d+-.+", d.name))
 
     rows = []
     counts = {"Easy": 0, "Medium": 0, "Hard": 0}
-    for num, name, title, link, diff, sols in probs:
+    for num, name, title, link, diff, sols, got_title, slug in probs:
+        if (not diff or not got_title) and name not in meta:
+            m = fetch_lc(slug)
+            if m:
+                meta[name] = m
+        m = meta.get(name, {})
+        diff = diff or m.get("difficulty", "")
+        if not got_title and m.get("title"):
+            title = m["title"]
         if diff in counts:
             counts[diff] += 1
         if not ideas.get(name) and sols:
@@ -98,6 +123,7 @@ def main():
     else:
         new = HEADER.format(stats=stats) + block + "\n"
     README.write_text(new, encoding="utf-8")
+    META.write_text(json.dumps(meta, indent=2, ensure_ascii=False, sort_keys=True), encoding="utf-8")
     IDEAS.write_text(json.dumps(ideas, indent=2, ensure_ascii=False, sort_keys=True), encoding="utf-8")
     print(f"{len(probs)} problems")
 
