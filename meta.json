@@ -1,0 +1,58 @@
+{
+  "1-two-sum": {
+    "difficulty": "Easy",
+    "title": "Two Sum"
+  },
+  "100-same-tree": {
+    "difficulty": "Easy",
+    "title": "Same Tree"
+  },
+  "13-roman-to-integer": {
+    "difficulty": "Easy",
+    "title": "Roman to Integer"
+  },
+  "175-combine-two-tables": {
+    "difficulty": "Easy",
+    "title": "Combine Two Tables"
+  },
+  "217-contains-duplicate": {
+    "difficulty": "Easy",
+    "title": "Contains Duplicate"
+  },
+  "242-valid-anagram": {
+    "difficulty": "Easy",
+    "title": "Valid Anagram"
+  },
+  "283-move-zeroes": {
+    "difficulty": "Easy",
+    "title": "Move Zeroes"
+  },
+  "387-first-unique-character-in-a-string": {
+    "difficulty": "Easy",
+    "title": "First Unique Character in a String"
+  },
+  "4-median-of-two-sorted-arrays": {
+    "difficulty": "Hard",
+    "title": "Median of Two Sorted Arrays"
+  },
+  "49-group-anagrams": {
+    "difficulty": "Medium",
+    "title": "Group Anagrams"
+  },
+  "66-plus-one": {
+    "difficulty": "Easy",
+    "title": "Plus One"
+  },
+  "782-jewels-and-stones": {
+    "difficulty": "Easy",
+    "title": "Jewels and Stones"
+  },
+  "88-merge-sorted-array": {
+    "difficulty": "Easy",
+    "title": "Merge Sorted Array"
+  },
+  "9-palindrome-number": {
+    "difficulty": "Easy",
+    "title": "Palindrome Number"
+  }
+}
