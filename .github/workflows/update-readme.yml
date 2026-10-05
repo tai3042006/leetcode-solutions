@@ -1,44 +1,42 @@
-
-name: Update LeetCode README
+name: Update README
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - "[0-9]*/**"
-      - "script/update_readme.py"
-      - ".github/workflows/update-readme.yml"
+    branches: [main]
+    paths-ignore:
+      - README.md
+      - ideas.json
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: update-readme
+  cancel-in-progress: false
+
 jobs:
-  update-readme:
+  update:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
-      - name: Update README
-        run: python script/update_readme.py
+      - name: Generate README
+        run: python scripts/update_readme.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}   # optional
 
-        - name: Commit README
+      - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add README.md
-
-          if ! git diff --cached --quiet; then
-            git commit -m "docs: update LeetCode README"
+          git add README.md ideas.json
+          if ! git diff --staged --quiet; then
+            git commit -m "docs: update README"
             git pull --rebase origin main
-            git push origin HEAD:main
+            git push
           fi
