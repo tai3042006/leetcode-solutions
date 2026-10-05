@@ -1,1 +1,5 @@
-{}
+{
+  "1-two-sum": "Brute force, O(n^2) and O(1).",
+  "4-median-of-two-sorted-arrays": "Two pointers, O(m + n) and O(1).",
+  "88-merge-sorted-array": "Three pointers from the end, O(m + n) and O(1)."
+}

@@ -10,13 +10,13 @@ Solutions are synced from LeetCode with [LeetSync](https://github.com/LeetSync/L
 <!-- PROBLEMS:START -->
 | # | Title | Solution | Difficulty | Basic idea (One line) |
 | --- | --- | --- | --- | --- |
-| 1 | [Two Sum](https://leetcode.com/problems/two-sum/) | [Java](1-two-sum/two-sum.java) | Easy | - |
-| 4 | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [Java](4-median-of-two-sorted-arrays/median-of-two-sorted-arrays.java) | Hard | - |
+| 1 | [Two Sum](https://leetcode.com/problems/two-sum/) | [Java](1-two-sum/two-sum.java) | Easy | Brute force, O(n^2) and O(1). |
+| 4 | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [Java](4-median-of-two-sorted-arrays/median-of-two-sorted-arrays.java) | Hard | Two pointers, O(m + n) and O(1). |
 | 9 | [Palindrome Number](https://leetcode.com/problems/palindrome-number/) | [Java](9-palindrome-number/palindrome-number.java) | Easy | - |
 | 13 | [Roman to Integer](https://leetcode.com/problems/roman-to-integer/) | [Java](13-roman-to-integer/roman-to-integer.java) | Easy | - |
 | 49 | [Group Anagrams](https://leetcode.com/problems/group-anagrams/) | [Java](49-group-anagrams/group-anagrams.java) | Medium | - |
 | 66 | [Plus One](https://leetcode.com/problems/plus-one/) | [Java](66-plus-one/plus-one.java) | Easy | - |
-| 88 | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [Java](88-merge-sorted-array/merge-sorted-array.java) | Easy | - |
+| 88 | [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | [Java](88-merge-sorted-array/merge-sorted-array.java) | Easy | Three pointers from the end, O(m + n) and O(1). |
 | 100 | [Same Tree](https://leetcode.com/problems/same-tree/) | [Java](100-same-tree/same-tree.java) | Easy | - |
 | 175 | [Combine Two Tables](https://leetcode.com/problems/combine-two-tables/) | [SQL](175-combine-two-tables/combine-two-tables.sql) | Easy | - |
 | 217 | [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | [Java](217-contains-duplicate/contains-duplicate.java) | Easy | - |
