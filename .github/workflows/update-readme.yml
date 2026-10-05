@@ -28,7 +28,7 @@ jobs:
       - name: Generate README
         run: python scripts/update_readme.py
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}   # optional
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}   # optional
 
       - name: Commit
         run: |

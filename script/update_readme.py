@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
 IDEAS = ROOT / "ideas.json"          # cache: {"1-two-sum": "Hash map, O(n) and O(n)"} - sua tay thoai mai
 START, END = "<!-- PROBLEMS:START -->", "<!-- PROBLEMS:END -->"
-MODEL = "claude-haiku-4-5-20251001"
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
 LANGS = {".java": "Java", ".py": "Python", ".cpp": "C++", ".c": "C", ".cs": "C#", ".js": "JavaScript",
          ".ts": "TypeScript", ".sql": "SQL", ".go": "Go", ".kt": "Kotlin", ".rs": "Rust", ".swift": "Swift",
          ".rb": "Ruby", ".php": "PHP", ".sh": "Bash"}
@@ -47,20 +47,21 @@ def parse_problem(d: Path):
 
 
 def ask_idea(code: str, title: str) -> str:
-    key = os.environ.get("ANTHROPIC_API_KEY")
+    key = os.environ.get("GEMINI_API_KEY")
     if not key:
         return ""
     prompt = (f"LeetCode problem: {title}\n\nSolution:\n{code[:6000]}\n\n"
               "Write ONE short line (max 25 words) in English describing the approach and its complexity, "
               "like: 'Hash map, O(n) and O(n)'. Output only that line.")
-    body = json.dumps({"model": MODEL, "max_tokens": 100,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    req = urllib.request.Request("https://api.anthropic.com/v1/messages", data=body, headers={
-        "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"})
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent"
+    body = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode()
+    req = urllib.request.Request(url, data=body, headers={
+        "x-goog-api-key": key, "content-type": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
             data = json.load(r)
-        return "".join(b.get("text", "") for b in data["content"]).strip().replace("\n", " ")
+        text = data["candidates"][0]["content"]["parts"][0]["text"]
+        return text.strip().replace("\n", " ")
     except Exception as e:
         print(f"[warn] AI failed for {title}: {e}", file=sys.stderr)
         return ""
