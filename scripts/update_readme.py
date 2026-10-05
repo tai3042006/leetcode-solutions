@@ -62,7 +62,7 @@ def fetch_lc(slug: str) -> dict:
 
 
 def ask_idea(code: str, title: str) -> str:
-    key = os.environ.get("GEMINI_API_KEY")
+    key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not key:
         return ""
     prompt = (f"LeetCode problem: {title}\n\nSolution:\n{code[:6000]}\n\n"
