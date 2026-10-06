@@ -47,6 +47,10 @@
     "difficulty": "Easy",
     "title": "Jewels and Stones"
   },
+  "83-remove-duplicates-from-sorted-list": {
+    "difficulty": "Easy",
+    "title": "Remove Duplicates from Sorted List"
+  },
   "88-merge-sorted-array": {
     "difficulty": "Easy",
     "title": "Merge Sorted Array"
