@@ -10,9 +10,9 @@ META = ROOT / "meta.json"          # cache title/difficulty lay tu LeetCode
 IDEAS = ROOT / "ideas.json"        # cache: {"1-two-sum": "Hash map, O(n) and O(n)"} - sua tay thoai mai
 START, END = "<!-- PROBLEMS:START -->", "<!-- PROBLEMS:END -->"
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
-MAX_AI_PER_RUN = int(os.environ.get("MAX_AI_PER_RUN", "40"))   # gioi han so lan goi AI moi lan chay
-AI_SLEEP = float(os.environ.get("AI_SLEEP", "4"))              # nghi giua cac lan goi (tranh 429)
-AI_OFF = False                                                  # tu tat AI neu loi vinh vien (404/401/403)
+MAX_AI_PER_RUN = int(os.environ.get("MAX_AI_PER_RUN", "15"))   # gioi han so lan goi AI moi lan chay
+AI_SLEEP = float(os.environ.get("AI_SLEEP", "8"))              # nghi giua cac lan goi (free tier RPM thap)
+AI_OFF = False                                                  # tu tat AI trong lan chay neu het quota / sai key
 LANGS = {".java": "Java", ".py": "Python", ".cpp": "C++", ".c": "C", ".cs": "C#", ".js": "JavaScript",
          ".ts": "TypeScript", ".sql": "SQL", ".go": "Go", ".kt": "Kotlin", ".rs": "Rust", ".swift": "Swift",
          ".rb": "Ruby", ".php": "PHP", ".sh": "Bash"}
@@ -86,16 +86,26 @@ def ask_idea(code: str, title: str) -> str:
             text = "".join(p.get("text", "") for p in parts)
             return " ".join(text.split())
         except urllib.error.HTTPError as e:
-            detail = e.read().decode(errors="ignore")[:300]
-            if e.code in (429, 500, 503) and attempt < 2:      # tam thoi -> doi roi thu lai
+            detail = e.read().decode(errors="ignore")
+            if e.code == 429:                                   # free tier het quota
+                m = re.search(r'"retryDelay":\s*"(\d+(?:\.\d+)?)s"', detail)
+                wait = float(m.group(1)) + 1 if m else None
+                if wait and wait <= 65 and attempt < 2:         # het quota theo phut -> doi roi thu lai
+                    time.sleep(wait)
+                    continue
+                AI_OFF = True                                   # het quota ngay -> dung, lan chay sau dien tiep
+                print("[warn] Gemini free quota exhausted -> stop AI for this run "
+                      "(remaining problems are filled on the next run)", file=sys.stderr)
+                return ""
+            if e.code in (500, 503) and attempt < 2:
                 time.sleep(15 * (attempt + 1))
                 continue
-            if e.code in (400, 401, 403, 404):                 # sai key/model -> khoi goi tiep
+            if e.code in (400, 401, 403, 404):                  # sai key/model -> khoi goi tiep
                 AI_OFF = True
-                print(f"[error] Gemini disabled for this run (model={MODEL}): HTTP {e.code} {detail}",
+                print(f"[error] Gemini disabled for this run (model={MODEL}): HTTP {e.code} {detail[:300]}",
                       file=sys.stderr)
             else:
-                print(f"[warn] AI failed for {title}: HTTP {e.code} {detail}", file=sys.stderr)
+                print(f"[warn] AI failed for {title}: HTTP {e.code} {detail[:300]}", file=sys.stderr)
             return ""
         except Exception as e:
             print(f"[warn] AI failed for {title}: {e}", file=sys.stderr)
